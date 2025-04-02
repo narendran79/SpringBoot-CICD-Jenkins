@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.student.model.Student;
 import com.student.service.StudentService;
 
@@ -22,6 +25,14 @@ public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
+	
+	@GetMapping("/list")
+    public List<Student> getListStudents() {
+        return Arrays.asList(
+                new Student(1, "John Doe",21,"CSE"),
+                new Student(2, "Jane Doe",22,"ECE")
+        );
+    }
 	
 	@GetMapping("/all")
 	@ResponseBody
