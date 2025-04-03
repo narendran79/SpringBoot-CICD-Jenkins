@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    
+    environment {
+        DOCKER_IMAGE_NAME = 'my-gradle-app'
+        DOCKER_TAG = 'latest'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/yourusername/my-pipeline-repo.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    sh './gradlew clean build'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    sh './gradlew test'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application to production'
+            }
+        }
+    }
+}
