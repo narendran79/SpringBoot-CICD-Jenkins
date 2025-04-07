@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - echo "Installing Gradle"
+      - curl -sSL https://services.gradle.org/distributions/gradle-8.1.1-bin.zip -o gradle.zip
+      - unzip gradle.zip
+      - export GRADLE_HOME=$(pwd)/gradle-8.1.1
+      - export PATH=$GRADLE_HOME/bin:$PATH
+      - gradle --version
+  pre_build:
+    commands:
+      - echo "Cleaning yje previous build"
+      - gradle clean
+  build:
+    commands:
+      - echo "Building the project"
+      - gradle build
+      - echo "Testing the project"
+      - gradle test
+  post_build:
+    commands:
+      - echo "The application are successfully build and tested!!!"
+      
